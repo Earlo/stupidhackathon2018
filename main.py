@@ -23,7 +23,7 @@ def draw_teppos(img, teppoes, thickness = 1):
         # the HOG detector returns slightly larger rectangles than the real objects.
         # so we slightly shrink the rectangles to get a nicer output.
         pad_w, pad_h = int(0.15*w), int(0.05*h)
-        cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), teppoes[key].age, thickness)
+        cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), teppoes[key].getCol(), thickness)
 
 def checkIfOldTeppo(teppoes, tep):
     best = [-1, 0.0]
@@ -65,12 +65,13 @@ if __name__ == '__main__':
             print(checkIfOldTeppo(teppoes,t))
         #draw_detections(frame,found)
         draw_teppos(frame, teppoes)
-
+        ded = []
         for key in teppoes:
             teppoes[key].grow()
             if (teppoes[key].isDead()):
-                teppoes.pop(key,None)
-
+                ded.append(key)
+        for d in ded:
+            teppoes.pop(d, None)
 
         cv2.imshow('feed',frame)
         ch = 0xFF & cv2.waitKey(1)

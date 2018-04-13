@@ -5,22 +5,24 @@ class Tulppu():
 		self.box = (x,y,w,h)
 		self.center = (x+w/2,y+h/2)
 		self.disabled = False
-		self.age = [0,0,0]
+		self.age = 255
 
 	def update(self, x,y,w,h):
+		self.age += 25
 		self.box = (x,y,w,h)
 		self.center = (x+w/2,y+h/2)
 	
 	def isAlike(self, tep):
-		self.age[0] += 10
-		if (self.age[0] < 255):
-			self.age[0] = 0
-			self.age[1] += 1
-			if (self.age[1] < 255):
-				self.age[1] = 0
-				self.age[2] += 1
-
 		return self.box[2]/getDist(*self.center,*getCenter(*tep))
+
+	def getCol(self):
+		return [self.age%255,max(0,(self.age-255)%255),max(0,(self.age-255*2)%255)]
+
+	def grow(self):
+		self.age = self.age - 10
+
+	def isDead(self):
+		return self.age < 0
 
 def getCenter(x,y,w,h):
 	return (x+w/2,y+h/2)
