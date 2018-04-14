@@ -5,9 +5,12 @@
     <title>Video Streaming Demonstration</title>
 </head>
 <body>
-<div id="main">
-    <img id="bg" src="{{ url_for('left_video_feed') }}">
-    <img id="gg" src="{{ url_for('right_video_feed') }}">
+    <div class="heightctrl" id="main">
+        <img id="bg" src="{{ url_for('left_video_feed') }}">
+    </div>
+    <div class="heightctrl" id="main2">
+        <img id="gg" src="{{ url_for('right_video_feed') }}">
+    </div>
 </div>
 </body>
 </html>

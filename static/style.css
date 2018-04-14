@@ -1,32 +1,39 @@
+body {
+    width: 100%;
+    height: 100%;
+}
+
 #bg {
     display: block;
-    width: 952px;
-    height: 1080px;
+    width: auto;
     margin: 0;
     padding: 0;
     border: 0;
-    float: left;
     overflow: hidden;
-
+    max-width: 100%;
+    height: 100%;
 }
 
 #gg {
     display: block;
-    width: 952px;
-    height: 1080px;
+    width: auto;
     margin: 0;
     padding: 0;
     border: 0;
     overflow: hidden;
+    max-width: 100%;
+    height: 100%;
 
 }
-#main {
+
+.heightctrl {
     margin: 0;
     padding: 0;
     border: 0;
-    float: left;
     font-size: 0;
     overflow: hidden;
-    line-height: 0;
-
+    height: 870px;
 }
+
+
+

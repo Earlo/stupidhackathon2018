@@ -30,17 +30,6 @@ def gen2():
         time.sleep(0)
 
 
-
-def loop1(func):
-    while True:
-        func()
-
-
-def loop2(func):
-    while True:
-        func()
-
-
 @app.route('/left_video_feed')
 def left_video_feed():
     threading.Thread(target=gen1, args=()).start()
@@ -56,4 +45,4 @@ def right_video_feed():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True)
+    app.run(host='10.100.63.158', threaded=True)
