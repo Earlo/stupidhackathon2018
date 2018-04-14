@@ -1,6 +1,5 @@
 from flask import Flask, render_template, Response
 from camera import VideoCamera1, VideoCamera2
-from multiprocessing import Process, Pool
 import threading
 import time
 
@@ -29,6 +28,7 @@ def gen2():
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
         time.sleep(0)
+
 
 
 def loop1(func):
