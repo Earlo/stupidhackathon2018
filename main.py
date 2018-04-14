@@ -66,7 +66,9 @@ if __name__ == '__main__':
         
         for t in found:
             len(teppoes)
-            print(checkIfOldTeppo(teppoes,t))
+            if ((t[2] > 0) and (t[3] > 0)):
+                
+                print(checkIfOldTeppo(teppoes,t))
         #draw_detections(frame,found)
         draw_teppos(frame, teppoes)
         ded = []
