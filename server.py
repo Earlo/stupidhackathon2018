@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 from camera import VideoCamera
 import threading
 import time
@@ -7,11 +7,22 @@ app = Flask(__name__)
 
 camera1 = VideoCamera(0)
 camera2 = VideoCamera(1)
-
+cameras = [camera1, camera2]
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/admin')
+def admin():
+    try:
+        e = int(request.args.get('Eye'))
+        w = int(request.args.get('Who'))
+        cameras[e].toggleTeppo(w)
+    except IndexError:
+        pass
+
+    return render_template('admin.html')
 
 
 def gen1():
@@ -42,6 +53,8 @@ def right_video_feed():
     threading.Thread(target=gen2, args=()).start()
     return Response(gen2(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
 
 
 if __name__ == '__main__':
