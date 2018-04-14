@@ -24,6 +24,10 @@ def draw_teppos(img, teppoes, thickness = 1):
         # so we slightly shrink the rectangles to get a nicer output.
         pad_w, pad_h = int(0.15*w), int(0.05*h)
         cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), teppoes[key].getCol(), thickness)
+        
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        cv2.putText(img,str(key),(x,y), font, 1,(255,0,255),2,cv2.LINE_AA)
+
 
 def checkIfOldTeppo(teppoes, tep):
     best = [-1, 0.0]
