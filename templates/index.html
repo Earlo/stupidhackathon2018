@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
     <title>Video Streaming Demonstration</title>
-  </head>
-  <body>
-    <h1>Video Streaming Demonstration</h1>
+</head>
+<body>
+<div id="main">
     <img id="bg" src="{{ url_for('left_video_feed') }}">
     <img id="gg" src="{{ url_for('right_video_feed') }}">
-  </body>
+</div>
+</body>
 </html>
