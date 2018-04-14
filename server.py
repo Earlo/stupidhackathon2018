@@ -1,12 +1,12 @@
 from flask import Flask, render_template, Response
-from camera import VideoCamera1, VideoCamera2
+from camera import VideoCamera
 import threading
 import time
 
 app = Flask(__name__)
 
-camera1 = VideoCamera1()
-camera2 = VideoCamera2()
+camera1 = VideoCamera(0)
+camera2 = VideoCamera(1)
 
 
 @app.route('/')
