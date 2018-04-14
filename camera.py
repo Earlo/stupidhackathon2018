@@ -78,7 +78,7 @@ class VideoCamera(object):
             else:
                 cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), (0,0,0), thickness)
             
-            cv2.putText(img,str(key),(x+pad_w, y+pad_h+48), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,0,255),2,cv2.LINE_AA)
+            cv2.putText(img,"CENSORED!!!",(x+pad_w, y+pad_h), cv2.FONT_HERSHEY_SIMPLEX, 2,(255,0,255),3,cv2.LINE_AA)
 
 
     def checkIfOldTeppo(self, tep):
