@@ -73,7 +73,7 @@ class VideoCamera(object):
             # so we slightly shrink the rectangles to get a nicer output.
             pad_w, pad_h = int(0.15*w), int(0.05*h)
             #self.teppoes[key].getCol()
-            if (not self.teppoes[key].disabled):
+            if (self.teppoes[key].disabled):
                 cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), (0,0,0), -1)
             else:
                 cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), (0,0,0), thickness)
