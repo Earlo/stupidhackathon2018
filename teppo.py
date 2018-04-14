@@ -23,7 +23,7 @@ class Tulppu():
 		return [self.age%255,max(0,(self.age-255)%255),max(0,(self.age-255*2)%255)]
 
 	def grow(self):
-		self.age = self.age - 10
+		self.age = self.age - 0
 
 	def isDead(self):
 		return self.age < 0
