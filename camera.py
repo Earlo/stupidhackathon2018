@@ -61,6 +61,10 @@ class VideoCamera(object):
 
         return frame
 
+    def toggleTeppo(self,i):
+        print(i, i in self.teppoes.keys())
+        if i in self.teppoes.keys():
+            self.teppoes[i].disabled = not self.teppoes[i].disabled
 
     def draw_teppos(self, img, thickness = 1):
         for key in self.teppoes:
@@ -68,10 +72,13 @@ class VideoCamera(object):
             # the HOG detector returns slightly larger rectangles than the real objects.
             # so we slightly shrink the rectangles to get a nicer output.
             pad_w, pad_h = int(0.15*w), int(0.05*h)
-            cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), self.teppoes[key].getCol(), thickness)
+            #self.teppoes[key].getCol()
+            if (self.teppoes[key].disabled):
+                cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), (0,0,0), -1)
+            else:
+                cv2.rectangle(img, (x+pad_w, y+pad_h), (x+w-pad_w, y+h-pad_h), (0,0,0), thickness)
             
-            font = cv2.FONT_HERSHEY_SIMPLEX
-            cv2.putText(img,str(key),(x,y), font, 1,(255,0,255),2,cv2.LINE_AA)
+            cv2.putText(img,str(key),(x+pad_w, y+pad_h+48), cv2.FONT_HERSHEY_SIMPLEX, 1,(255,0,255),2,cv2.LINE_AA)
 
 
     def checkIfOldTeppo(self, tep):
