@@ -13,7 +13,11 @@ class Tulppu():
 		self.center = (x+w/2,y+h/2)
 	
 	def isAlike(self, tep):
-		return sqrt((self.box[2])**2 + (self.box[3])**2)/getDist(*self.center,*getCenter(*tep))
+		d = getDist(*self.center,*getCenter(*tep))
+		if d > 0:
+			return sqrt((self.box[2])**2 + (self.box[3])**2)/d
+		else:
+			return 1.0
 
 	def getCol(self):
 		return [self.age%255,max(0,(self.age-255)%255),max(0,(self.age-255*2)%255)]
