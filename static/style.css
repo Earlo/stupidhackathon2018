@@ -1,0 +1,32 @@
+#bg {
+    display: block;
+    width: 952px;
+    height: 1080px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    float: left;
+    overflow: hidden;
+
+}
+
+#gg {
+    display: block;
+    width: 952px;
+    height: 1080px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+
+}
+#main {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    float: left;
+    font-size: 0;
+    overflow: hidden;
+    line-height: 0;
+
+}
