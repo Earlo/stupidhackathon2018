@@ -1,44 +1,59 @@
 from flask import Flask, render_template, Response
-from camera import VideoCamera1, VideoCamera2
-from multiprocessing import Process
+from camera import VideoCamera
+import threading
 import time
 
 app = Flask(__name__)
-left_frames = ""
-right_frames = ""
+
+camera1 = VideoCamera(0)
+camera2 = VideoCamera(1)
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 
-def gen1(camera):
+def gen1():
     while True:
-        frame = camera.get_frame()
+        frame = camera1.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
         time.sleep(0)
 
-def gen2(camera):
+
+def gen2():
     while True:
-        frame = camera.get_frame()
+        frame = camera2.get_frame()
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
         time.sleep(0)
+
+
+
+def loop1(func):
+    while True:
+        func()
+
+
+def loop2(func):
+    while True:
+        func()
+
 
 @app.route('/left_video_feed')
 def left_video_feed():
-    async_response = Process(target=gen1, args=(VideoCamera1(),)).start()
-    return Response(async_response.get(),
+    threading.Thread(target=gen1, args=()).start()
+    return Response(gen1(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 @app.route('/right_video_feed')
 def right_video_feed():
-    async_response = Process(target=gen2, args=(VideoCamera2(),)).start()
-    return Response(async_response.get(),
+    threading.Thread(target=gen2, args=()).start()
+    return Response(gen2(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', threaded=True)
